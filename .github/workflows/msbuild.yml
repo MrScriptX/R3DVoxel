@@ -1,6 +1,6 @@
 name: MSBuild
 
-on: [push]
+on: [push, pull_request]
 
 env:
   # Path to the solution file relative to the root of the project.
@@ -22,17 +22,16 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Install Vulkan SDK
-      uses: humbletim/setup-vulkan-sdk@v1.0.1
-      with:
-        vulkan-version: 1.2.176.1
-     
-    - name: Check vulkan path 
-      run: ls VULKAN_SDK
-    - name: Check folder include
-      run: ls VULKAN_SDK\include
-    - name: Check vulkan.h
-      run: ls VULKAN_SDK\include\vulkan
+    #  uses: humbletim/setup-vulkan-sdk@v1.0.1
+    #  with:
+    #    vulkan-version: 1.2.176.1
 
+      run: |
+        Invoke-WebRequest -Uri "https://sdk.lunarg.com/sdk/download/1.2.154.1/windows/VulkanSDK-1.2.154.1-Installer.exe" -OutFile VulkanSDK.exe
+        $installer = Start-Process -FilePath VulkanSDK.exe -Wait -PassThru -ArgumentList @("/S");
+        $installer.WaitForExit();
+        ls VULKAN_SDK;
+        
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
