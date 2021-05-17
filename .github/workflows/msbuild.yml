@@ -30,6 +30,8 @@ jobs:
       run: ls VULKAN_SDK
     - name: Check folder include
       run: ls VULKAN_SDK\include
+    - name: Check vulkan.h
+      run: ls VULKAN_SDK\include\vulkan
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
