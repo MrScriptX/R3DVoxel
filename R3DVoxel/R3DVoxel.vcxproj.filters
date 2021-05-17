@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="VoxelEngine">
+      <UniqueIdentifier>{fdcdd7a5-e8f9-446b-9932-84b3545f509d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{14388d98-61f9-4b04-886c-2d198d0005f1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="VoxelEngine\Chunk.cpp">
+      <Filter>VoxelEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="VoxelEngine\ChunkManager.cpp">
+      <Filter>VoxelEngine</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="VoxelEngine\Chunk.h">
+      <Filter>VoxelEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="VoxelEngine\Voxel.h">
+      <Filter>VoxelEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="VoxelEngine\ChunkManager.h">
+      <Filter>VoxelEngine</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
