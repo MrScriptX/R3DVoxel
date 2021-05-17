@@ -24,7 +24,7 @@ jobs:
     - name: Install Vulkan SDK
       uses: humbletim/setup-vulkan-sdk@v1.0.1
       with:
-        vulkan-version: 1.2.161.1
+        vulkan-version: 1.2.176.1
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
