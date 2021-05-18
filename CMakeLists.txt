@@ -13,10 +13,9 @@ ELSE()
 ENDIF()
 
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "R3DVoxel/*.cpp")
-file(GLOB_RECURSE INCLUDES RELATIVE ${CMAKE_SOURCE_DIR} "R3DEngine/Include/*.h")
 
 # add the executable
-add_executable(R3DVoxel ${SOURCES} ${INCLUDES})
+add_executable(R3DVoxel ${SOURCES})
 
 target_link_libraries(R3DVoxel "${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug/Engine.lib")
 target_link_libraries(R3DVoxel "${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug/glfw3.lib")
