@@ -7,14 +7,14 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 IF(DEFINED ENV{VULKAN_SDK})
-    MESSAGE(STATUS "VULKAN PATH: $ENV{VULKAN_SDK}")
+    MESSAGE(STATUS "VULKAN PATH FOUND: $ENV{VULKAN_SDK}")
 ELSE()
     MESSAGE(STATUS "VULKAN PATH NOT FOUND")
 ENDIF()
 
 # add includes directory
 include_directories("$ENV{VULKAN_SDK}/Include")
-include_directories("R3DEngine/Include")
+include_directories("${PROJECT_SOURCE_DIR}/R3DEngine/Include")
 link_directories("${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug")
 
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "R3DVoxel/*.cpp")
