@@ -13,8 +13,8 @@ ELSE()
 ENDIF()
 
 # add includes directory
-include_directories("$ENV{VULKAN_SDK}/Include")
-include_directories("${PROJECT_SOURCE_DIR}/R3DEngine/Include")
+#include_directories("$ENV{VULKAN_SDK}/Include")
+#include_directories("${PROJECT_SOURCE_DIR}/R3DEngine/Include")
 link_directories("${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug")
 
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "R3DVoxel/*.cpp")
@@ -28,7 +28,7 @@ target_link_libraries(R3DVoxel "${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug/glew3
 target_link_libraries(R3DVoxel "${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug/assimp-vc142-mtd.lib")
 target_link_libraries(R3DVoxel "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib")
 
-
 target_include_directories(R3DVoxel PUBLIC "${PROJECT_BINARY_DIR}")
-target_include_directories(R3DVoxel PUBLIC "${PROJECT_SOURCE_DIR}/R3DEngine/Include")
+target_include_directories(R3DVoxel PRIVATE "${PROJECT_SOURCE_DIR}/R3DEngine/Include")
 target_include_directories(R3DVoxel PUBLIC "${PROJECT_SOURCE_DIR}/R3DVoxel")
+target_include_directories(R3DVoxel PRIVATE $ENV{VULKAN_SDK}/Include)
