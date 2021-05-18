@@ -20,7 +20,7 @@ link_directories("${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug")
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "R3DVoxel/*.cpp")
 
 # add the executable
-add_executable(R3DVoxel ${SOURCES})
+add_executable(R3DVoxel ${SOURCES} ${PROJECT_SOURCE_DIR}/R3DEngine/Include/GLFW/glfw3.h)
 
 target_link_libraries(R3DVoxel "${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug/Engine.lib")
 target_link_libraries(R3DVoxel "${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug/glfw3.lib")
