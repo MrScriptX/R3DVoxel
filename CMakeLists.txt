@@ -14,6 +14,7 @@ ENDIF()
 
 # add includes directory
 include_directories("$ENV{VULKAN_SDK}/Include")
+include_directories("${PROJECT_SOURCE_DIR}/R3DEngine/Include")
 link_directories("${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug")
 
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "R3DVoxel/*.cpp")
