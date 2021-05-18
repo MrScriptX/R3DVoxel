@@ -39,4 +39,4 @@ jobs:
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake ${{github.workspace}}/build -Wdev --debug-output --trace
+      run: cmake --build ${{github.workspace}}/build -Wdev --debug-output
