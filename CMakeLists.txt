@@ -12,15 +12,11 @@ ELSE()
     MESSAGE(STATUS "VULKAN PATH NOT FOUND")
 ENDIF()
 
-# add includes directory
-#include_directories("$ENV{VULKAN_SDK}/Include")
-#include_directories("${PROJECT_SOURCE_DIR}/R3DEngine/Include")
-link_directories("${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug")
-
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "R3DVoxel/*.cpp")
+file(GLOB_RECURSE INCLUDES RELATIVE ${CMAKE_SOURCE_DIR} "R3DEngine/Include/*.h")
 
 # add the executable
-add_executable(R3DVoxel ${SOURCES} ${PROJECT_SOURCE_DIR}/R3DEngine/Include/GLFW/glfw3.h)
+add_executable(R3DVoxel ${SOURCES} ${INCLUDES})
 
 target_link_libraries(R3DVoxel "${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug/Engine.lib")
 target_link_libraries(R3DVoxel "${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug/glfw3.lib")
@@ -29,6 +25,6 @@ target_link_libraries(R3DVoxel "${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug/assim
 target_link_libraries(R3DVoxel "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib")
 
 target_include_directories(R3DVoxel PUBLIC "${PROJECT_BINARY_DIR}")
-target_include_directories(R3DVoxel PRIVATE "${PROJECT_SOURCE_DIR}/R3DEngine/Include")
+target_include_directories(R3DVoxel PUBLIC "${PROJECT_SOURCE_DIR}/R3DEngine/Include")
 target_include_directories(R3DVoxel PUBLIC "${PROJECT_SOURCE_DIR}/R3DVoxel")
-target_include_directories(R3DVoxel PRIVATE $ENV{VULKAN_SDK}/Include)
+target_include_directories(R3DVoxel PUBLIC $ENV{VULKAN_SDK}/Include)
