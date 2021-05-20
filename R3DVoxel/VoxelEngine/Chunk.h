@@ -1,5 +1,5 @@
-#ifndef CHUNK_H
-#define CHUNK_H
+#ifndef R3DENGINE_CHUNK_H_
+#define R3DENGINE_CHUNK_H_
 
 #include <bitset>
 #include <Engine.h>
@@ -22,4 +22,4 @@ private:
 	std::bitset<Voxel::CHUNK_SIZE_CUBE> m_active_voxel;
 };
 
-#endif
+#endif //!R3DENGINE_CHUNK_H_
