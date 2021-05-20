@@ -15,7 +15,7 @@ ENDIF()
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "R3DVoxel/*.cpp")
 
 # add the executable
-add_executable(R3DVoxel ${SOURCES} ${INCLUDES})
+add_executable(R3DVoxel ${SOURCES})
 
 target_include_directories(R3DVoxel PUBLIC "${PROJECT_BINARY_DIR}")
 target_include_directories(R3DVoxel PUBLIC "${PROJECT_SOURCE_DIR}/R3DEngine/Include")
