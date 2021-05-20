@@ -13,18 +13,17 @@ ELSE()
 ENDIF()
 
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "R3DVoxel/*.cpp")
-file(GLOB_RECURSE INCLUDES RELATIVE ${CMAKE_SOURCE_DIR} "R3DEngine/Include/*.h")
 
 # add the executable
 add_executable(R3DVoxel ${SOURCES} ${INCLUDES})
+
+target_include_directories(R3DVoxel PUBLIC "${PROJECT_BINARY_DIR}")
+target_include_directories(R3DVoxel PUBLIC "${PROJECT_SOURCE_DIR}/R3DEngine/Include")
+target_include_directories(R3DVoxel PUBLIC "${PROJECT_SOURCE_DIR}/R3DVoxel")
+target_include_directories(R3DVoxel PUBLIC $ENV{VULKAN_SDK}/Include)
 
 target_link_libraries(R3DVoxel "${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug/Engine.lib")
 target_link_libraries(R3DVoxel "${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug/glfw3.lib")
 target_link_libraries(R3DVoxel "${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug/glew32.lib")
 target_link_libraries(R3DVoxel "${PROJECT_SOURCE_DIR}/R3DEngine/Libs/Debug/assimp-vc142-mtd.lib")
 target_link_libraries(R3DVoxel "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib")
-
-target_include_directories(R3DVoxel PUBLIC "${PROJECT_BINARY_DIR}")
-target_include_directories(R3DVoxel PUBLIC "${PROJECT_SOURCE_DIR}/R3DEngine/Include")
-target_include_directories(R3DVoxel PUBLIC "${PROJECT_SOURCE_DIR}/R3DVoxel")
-target_include_directories(R3DVoxel PUBLIC $ENV{VULKAN_SDK}/Include)
