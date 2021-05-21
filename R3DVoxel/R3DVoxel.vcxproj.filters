@@ -39,5 +39,8 @@
     <ClInclude Include="VoxelEngine\ChunkManager.h">
       <Filter>VoxelEngine</Filter>
     </ClInclude>
+    <ClInclude Include="VoxelEngine\Cube.h">
+      <Filter>VoxelEngine</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

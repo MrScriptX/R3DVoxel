@@ -17,7 +17,7 @@ void ChunkManager::InitWorld()
 	{
 		for (int32_t z = m_render_min.z; z <= m_render_max.z; z++)
 		{
-			CreateNewChunk(x, 0, z);
+			CreateNewChunk(x, -1, z);
 		}
 	}
 }

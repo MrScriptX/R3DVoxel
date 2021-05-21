@@ -12,6 +12,7 @@ Chunk::Chunk(const int32_t posx, const int32_t posy, const int32_t posz)
 			for (int32_t z = 0; z < Voxel::CHUNK_SIZE; z++)
 			{
 				m_active_voxel.flip(x + y * Voxel::CHUNK_SIZE + z * Voxel::CHUNK_SIZE_SQR);
+				m_blocktypes.at(x + y * Voxel::CHUNK_SIZE + z * Voxel::CHUNK_SIZE_SQR) = TBlock::DEFAULT;
 			}
 		}
 	}
@@ -103,20 +104,26 @@ void Chunk::CreateCube(Geometry& mesh, const bool x_neg, const bool x_pos, const
 	glm::vec2 t4(2.0f, 2.0f);
 
 	//color
-	glm::vec3 c1(0.7f, 0.f, 0.f);
-	glm::vec3 c2(0.f, 1.f, 0.f);
-	glm::vec3 c3(0.f, 0.f, 1.f);
-	glm::vec3 c4(0.f, 1.f, 0.f);
+	glm::vec3 color;
+	switch (m_blocktypes[x + y * Voxel::CHUNK_SIZE + z * Voxel::CHUNK_SIZE_SQR])
+	{
+	case TBlock::DEFAULT:
+		color = { 1.0f, 1.0f, 1.0f };
+		break;
+	default:
+		color = { 1.0f, 0.3f, 0.0f };
+		break;
+	}
 
 	//declare vertex
-	uint32_t index_0 = mesh.addVertex(p1, c1, t1);
-	uint32_t index_1 = mesh.addVertex(p2, c1, t2);
-	uint32_t index_2 = mesh.addVertex(p3, c1, t3);
-	uint32_t index_3 = mesh.addVertex(p4, c1, t4);
-	uint32_t index_4 = mesh.addVertex(p5, c1, t1);
-	uint32_t index_5 = mesh.addVertex(p6, c1, t2);
-	uint32_t index_6 = mesh.addVertex(p7, c1, t3);
-	uint32_t index_7 = mesh.addVertex(p8, c1, t4);
+	uint32_t index_0 = mesh.addVertex(p1, color, t1);
+	uint32_t index_1 = mesh.addVertex(p2, color, t2);
+	uint32_t index_2 = mesh.addVertex(p3, color, t3);
+	uint32_t index_3 = mesh.addVertex(p4, color, t4);
+	uint32_t index_4 = mesh.addVertex(p5, color, t1);
+	uint32_t index_5 = mesh.addVertex(p6, color, t2);
+	uint32_t index_6 = mesh.addVertex(p7, color, t3);
+	uint32_t index_7 = mesh.addVertex(p8, color, t4);
 
 	//front
 	if (!z_neg)

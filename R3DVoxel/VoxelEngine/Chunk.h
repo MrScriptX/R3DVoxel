@@ -5,6 +5,7 @@
 #include <Engine.h>
 
 #include "Voxel.h"
+#include "Cube.h"
 
 class Chunk
 {
@@ -22,6 +23,7 @@ private:
 	glm::vec3 m_position;
 
 	std::bitset<Voxel::CHUNK_SIZE_CUBE> m_active_voxel;
+	std::array<TBlock, Voxel::CHUNK_SIZE_CUBE> m_blocktypes;
 };
 
 #endif //!R3DENGINE_CHUNK_H_
