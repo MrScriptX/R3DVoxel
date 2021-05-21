@@ -38,7 +38,7 @@ void Application::Start()
 
 	do
 	{
-		chunk_manager.UpdateWorld(scene, mp_engine->GetMainCamera());
+		//chunk_manager.UpdateWorld(scene, mp_engine->GetMainCamera());
 
 		mp_engine->update();
 		mp_engine->draw();

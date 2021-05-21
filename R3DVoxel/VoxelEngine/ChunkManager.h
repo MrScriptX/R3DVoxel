@@ -49,7 +49,7 @@ private:
 	std::shared_ptr<Material> mp_world_mat;
 
 	std::map<ChunkKey, std::unique_ptr<Chunk>> m_chunk_map;
-	const uint8_t m_load_radius = 2;
+	const uint8_t m_load_radius = 1;
 	glm::vec3 m_render_position;
 
 	glm::vec3 m_render_max;
