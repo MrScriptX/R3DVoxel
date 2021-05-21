@@ -16,6 +16,9 @@ public:
 	void UpdateMesh();
 	void DeleteChunk(std::shared_ptr<GameObject> world);
 
+	void SetVoxel(const uint32_t x, const uint32_t y, const uint32_t z);
+	void SetBlockType(const uint32_t x, const uint32_t y, const uint32_t z, const TBlock type);
+
 private:
 	void CreateCube(Geometry& mesh, const bool x_neg, const bool x_pos, const bool y_neg, const bool y_pos, const bool z_neg, const bool z_pos, uint32_t x, uint32_t y, uint32_t z);
 

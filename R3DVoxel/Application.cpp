@@ -19,8 +19,8 @@ void Application::Start()
 	std::shared_ptr<Material> world_mat = mp_engine->CreateMaterial(TSHADER::NO_TEXTURE);
 	std::shared_ptr<GameObject> world = mp_engine->CreateGameObject();
 
-	ChunkManager chunk_manager(world, world_mat);
-	chunk_manager.InitWorld();
+	ChunkManager chunk_manager(world, world_mat, mp_engine->GetMainCamera());
+	chunk_manager.CreateWorld();
 
 	std::shared_ptr<Scene> scene = std::make_shared<Scene>();
 	mp_engine->setScene(scene);

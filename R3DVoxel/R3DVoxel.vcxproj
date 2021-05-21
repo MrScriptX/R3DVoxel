@@ -150,12 +150,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="VoxelEngine\Chunk.cpp" />
     <ClCompile Include="VoxelEngine\ChunkManager.cpp" />
+    <ClCompile Include="VoxelEngine\TerrainGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="VoxelEngine\Chunk.h" />
     <ClInclude Include="VoxelEngine\ChunkManager.h" />
     <ClInclude Include="VoxelEngine\Cube.h" />
+    <ClInclude Include="VoxelEngine\TerrainGenerator.h" />
     <ClInclude Include="VoxelEngine\Voxel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

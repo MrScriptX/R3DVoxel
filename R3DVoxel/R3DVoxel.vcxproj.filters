@@ -25,6 +25,9 @@
     <ClCompile Include="VoxelEngine\ChunkManager.cpp">
       <Filter>VoxelEngine</Filter>
     </ClCompile>
+    <ClCompile Include="VoxelEngine\TerrainGenerator.cpp">
+      <Filter>VoxelEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -40,6 +43,9 @@
       <Filter>VoxelEngine</Filter>
     </ClInclude>
     <ClInclude Include="VoxelEngine\Cube.h">
+      <Filter>VoxelEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="VoxelEngine\TerrainGenerator.h">
       <Filter>VoxelEngine</Filter>
     </ClInclude>
   </ItemGroup>

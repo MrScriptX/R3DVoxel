@@ -5,17 +5,7 @@ Chunk::Chunk(const int32_t posx, const int32_t posy, const int32_t posz)
 	m_position = { posx, posy, posz };
 	m_mesh_id = -1;
 
-	for (int32_t x = 0; x < Voxel::CHUNK_SIZE; x++)
-	{
-		for (int32_t y = 0; y < Voxel::CHUNK_SIZE; y++)
-		{
-			for (int32_t z = 0; z < Voxel::CHUNK_SIZE; z++)
-			{
-				m_active_voxel.flip(x + y * Voxel::CHUNK_SIZE + z * Voxel::CHUNK_SIZE_SQR);
-				m_blocktypes.at(x + y * Voxel::CHUNK_SIZE + z * Voxel::CHUNK_SIZE_SQR) = TBlock::DEFAULT;
-			}
-		}
-	}
+	m_active_voxel.reset();
 }
 
 void Chunk::CreateChunk(std::shared_ptr<GameObject> world, std::shared_ptr<Material> mat)
@@ -77,12 +67,21 @@ void Chunk::CreateChunk(std::shared_ptr<GameObject> world, std::shared_ptr<Mater
 
 void Chunk::UpdateMesh()
 {
-	
 }
 
 void Chunk::DeleteChunk(std::shared_ptr<GameObject> world)
 {
 	world->RemoveMesh(m_mesh_id); // remove mesh id
+}
+
+void Chunk::SetVoxel(const uint32_t x, const uint32_t y, const uint32_t z)
+{
+	m_active_voxel.set(x + y * Voxel::CHUNK_SIZE + z * Voxel::CHUNK_SIZE_SQR, true);
+}
+
+void Chunk::SetBlockType(const uint32_t x, const uint32_t y, const uint32_t z, const TBlock type)
+{
+	m_blocktypes.at(x + y * Voxel::CHUNK_SIZE + z * Voxel::CHUNK_SIZE_SQR) = type;
 }
 
 void Chunk::CreateCube(Geometry& mesh, const bool x_neg, const bool x_pos, const bool y_neg, const bool y_pos, const bool z_neg, const bool z_pos, uint32_t x, uint32_t y, uint32_t z)

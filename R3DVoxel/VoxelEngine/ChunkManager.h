@@ -3,8 +3,10 @@
 
 #include <map>
 #include <utility>
+#include <cmath>
 
 #include "Chunk.h"
+#include "TerrainGenerator.h"
 
 struct ChunkKey
 {
@@ -35,19 +37,22 @@ inline bool const operator<(const ChunkKey& l, const ChunkKey& r)
 class ChunkManager
 {
 public:
-	ChunkManager(std::shared_ptr<GameObject> pworld, std::shared_ptr<Material> p_world_mat);
+	ChunkManager(std::shared_ptr<GameObject> pworld, std::shared_ptr<Material> p_world_mat, std::shared_ptr<Camera> p_camera);
 	~ChunkManager();
 
-	void InitWorld();
+	void CreateWorld();
 	void UpdateWorld(std::shared_ptr<Scene> p_scene, std::shared_ptr<Camera> p_camera);
 
 	void CreateNewChunk(int32_t x, int32_t y, int32_t z);
 	void DestroyChunk(const int32_t x, const int32_t y, const int32_t z);
 
 private:
+	std::unique_ptr<TerrainGenerator> mp_terrain_generator;
+
 	std::shared_ptr<GameObject> mp_world;
 	std::shared_ptr<Material> mp_world_mat;
 
+	std::map<ChunkKey, std::unique_ptr<Chunk>> m_setup_list;
 	std::map<ChunkKey, std::unique_ptr<Chunk>> m_chunk_map;
 	const uint8_t m_load_radius = 1;
 	glm::vec3 m_render_position;
