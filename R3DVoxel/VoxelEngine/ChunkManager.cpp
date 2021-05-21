@@ -13,8 +13,8 @@ ChunkManager::~ChunkManager()
 
 void ChunkManager::CreateWorld()
 {
-	CreateNewChunk(0, 0, 0);
-	/*for (int32_t x = m_render_min.x; x <= m_render_max.x; x++)
+	//CreateNewChunk(0, 0, 0);
+	for (int32_t x = m_render_min.x; x <= m_render_max.x; x++)
 	{
 		for (int32_t y = m_render_min.y; y <= m_render_max.y; y++)
 		{
@@ -23,7 +23,7 @@ void ChunkManager::CreateWorld()
 				CreateNewChunk(x, y, z);
 			}
 		}
-	}*/
+	}
 }
 
 void ChunkManager::UpdateWorld(std::shared_ptr<Scene> p_scene, std::shared_ptr<Camera> p_camera)
@@ -118,7 +118,7 @@ void ChunkManager::CreateNewChunk(int32_t x, int32_t y, int32_t z)
 {
 	ChunkKey key = { x, y, z };
 
-	std::unique_ptr<Chunk> p_chunk = mp_terrain_generator->SetupSphere(x, y, z);
+	std::unique_ptr<Chunk> p_chunk = mp_terrain_generator->SetupWorld(x, y, z);
 	p_chunk->CreateChunk(mp_world, mp_world_mat);
 
 	m_chunk_map.insert(std::pair<ChunkKey, std::unique_ptr<Chunk>>(key, std::move(p_chunk)));
