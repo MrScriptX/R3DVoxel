@@ -5,9 +5,9 @@
 
 namespace Voxel
 {
-	constexpr int32_t CHUNK_SIZE = 16;
-	constexpr int32_t CHUNK_SIZE_SQR = CHUNK_SIZE * CHUNK_SIZE;
-	constexpr int32_t CHUNK_SIZE_CUBE = CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE;
+	constexpr uint32_t CHUNK_SIZE = 16;
+	constexpr uint32_t CHUNK_SIZE_SQR = CHUNK_SIZE * CHUNK_SIZE;
+	constexpr uint32_t CHUNK_SIZE_CUBE = CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE;
 
 	constexpr float VOXEL_SIZE = 0.5f;
 }
