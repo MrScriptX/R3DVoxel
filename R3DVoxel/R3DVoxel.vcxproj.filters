@@ -11,6 +11,9 @@
     <Filter Include="Core">
       <UniqueIdentifier>{14388d98-61f9-4b04-886c-2d198d0005f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{f9d7376d-ebf9-4af9-9d5d-099f60e88247}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,6 +30,9 @@
     </ClCompile>
     <ClCompile Include="VoxelEngine\TerrainGenerator.cpp">
       <Filter>VoxelEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\perlin.cpp">
+      <Filter>utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +53,9 @@
     </ClInclude>
     <ClInclude Include="VoxelEngine\TerrainGenerator.h">
       <Filter>VoxelEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\perlin.h">
+      <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

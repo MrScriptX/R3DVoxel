@@ -1,7 +1,8 @@
 #include "TerrainGenerator.h"
 
-TerrainGenerator::TerrainGenerator()
+TerrainGenerator::TerrainGenerator() : m_perlin(1337)
 {
+	//m_perlin.exportppm();
 }
 
 TerrainGenerator::~TerrainGenerator()
@@ -41,7 +42,11 @@ std::unique_ptr<Chunk> TerrainGenerator::SetupWorld(const int32_t posx, const in
 		{
 			for (int32_t z = 0; z < Voxel::CHUNK_SIZE; z++)
 			{
-				p_chunk->SetVoxel(x, y, z);
+				if (y + posy * Voxel::CHUNK_SIZE < ((m_perlin.perlin(static_cast<float>(x + posx * Voxel::CHUNK_SIZE), static_cast<float>(z + posz * Voxel::CHUNK_SIZE)) + 1) / 2) * Voxel::CHUNK_SIZE)
+				{
+					p_chunk->SetVoxel(x, y, z);
+				}
+
 				p_chunk->SetBlockType(x, y, z, TBlock::DEFAULT);
 			}
 		}

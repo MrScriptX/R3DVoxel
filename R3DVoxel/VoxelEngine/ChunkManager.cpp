@@ -2,6 +2,7 @@
 
 ChunkManager::ChunkManager(std::shared_ptr<GameObject> pworld, std::shared_ptr<Material> p_world_mat, std::shared_ptr<Camera> p_camera) : mp_world(pworld), mp_world_mat(p_world_mat)
 {
+	mp_terrain_generator = std::make_unique<TerrainGenerator>();
 	m_render_position = p_camera->GetPosition();
 	m_render_max = { m_render_position.x + m_load_radius, m_render_position.y + m_load_radius, m_render_position.z + m_load_radius };
 	m_render_min = { m_render_position.x - m_load_radius, m_render_position.y - m_load_radius, m_render_position.z - m_load_radius };

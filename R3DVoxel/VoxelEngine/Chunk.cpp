@@ -10,6 +10,9 @@ Chunk::Chunk(const int32_t posx, const int32_t posy, const int32_t posz)
 
 void Chunk::CreateChunk(std::shared_ptr<GameObject> world, std::shared_ptr<Material> mat)
 {
+	if (m_active_voxel == false)
+		return;
+
 	Geometry mesh;
 	for (uint32_t x = 0; x < Voxel::CHUNK_SIZE; x++)
 	{

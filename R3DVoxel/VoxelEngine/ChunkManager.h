@@ -54,7 +54,7 @@ private:
 
 	std::map<ChunkKey, std::unique_ptr<Chunk>> m_setup_list;
 	std::map<ChunkKey, std::unique_ptr<Chunk>> m_chunk_map;
-	const uint8_t m_load_radius = 1;
+	const uint8_t m_load_radius = 5;
 	glm::vec3 m_render_position;
 
 	glm::vec3 m_render_max;
