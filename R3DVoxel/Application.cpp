@@ -16,15 +16,28 @@ void Application::Start()
 		std::cerr << e.what() << std::endl;
 	}
 
+	// init world
 	std::shared_ptr<Material> world_mat = mp_engine->CreateMaterial(TSHADER::NO_TEXTURE);
 	std::shared_ptr<GameObject> world = mp_engine->CreateGameObject();
 
 	ChunkManager chunk_manager(world, world_mat, mp_engine->GetMainCamera());
 	chunk_manager.CreateWorld();
 
+	glm::vec3 lposition = { 50.0f, 100.0f, 0.0f };
+
+	// create global lighting
+	std::shared_ptr<DirectionalLight> light = std::make_shared<DirectionalLight>();
+	light->ambient_strength = 0.2f;
+	light->diffuse_strength = 1.0f;
+	light->specular_strength = 1.0f;
+	light->color = glm::vec3(1.0f, 1.0f, 1.0f);
+	light->position = lposition;
+	light->direction = glm::normalize(light->position - glm::vec3(.0f, .0f, .0f));
+
 	std::shared_ptr<Scene> scene = std::make_shared<Scene>();
 	mp_engine->setScene(scene);
 	scene->AddGameObject(world);
+	scene->AddLight(light);
 
 	std::function<void()> wireframemode = [this]() {
 		mp_engine->SetWireframeMode();
@@ -38,7 +51,7 @@ void Application::Start()
 
 	do
 	{
-		//chunk_manager.UpdateWorld(scene, mp_engine->GetMainCamera());
+		chunk_manager.UpdateWorld(scene, mp_engine->GetMainCamera());
 
 		mp_engine->update();
 		mp_engine->draw();
