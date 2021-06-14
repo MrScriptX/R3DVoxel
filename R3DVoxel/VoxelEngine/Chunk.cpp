@@ -8,8 +8,10 @@ Chunk::Chunk(const int32_t posx, const int32_t posy, const int32_t posz)
 	m_active_voxel.reset();
 }
 
-void Chunk::CreateChunk(std::shared_ptr<GameObject> world, std::shared_ptr<Material> mat)
+void Chunk::CreateChunk(const std::map<ChunkKey, std::unique_ptr<Chunk>>& chunk_map, std::shared_ptr<GameObject> world, std::shared_ptr<Material> mat)
 {
+	// Get neighboor chunks and check if voxel are active
+
 	if (m_active_voxel == false)
 		return;
 
@@ -27,11 +29,20 @@ void Chunk::CreateChunk(std::shared_ptr<GameObject> world, std::shared_ptr<Mater
 					{
 						x_neg = m_active_voxel[(x - 1) + y * Voxel::CHUNK_SIZE + z * Voxel::CHUNK_SIZE_SQR];
 					}
+					else if (chunk_map.find({ static_cast<int32_t>(m_position.x) - 1, static_cast<int32_t>(m_position.y), static_cast<int32_t>(m_position.z) }) != chunk_map.end())
+					{
+						// check if face is hidden by other chunk
+						x_neg = chunk_map.at({ static_cast<int32_t>(m_position.x) - 1, static_cast<int32_t>(m_position.y), static_cast<int32_t>(m_position.z) })->GetVoxel(x + Voxel::CHUNK_SIZE - 1, y, z);
+					}
 
 					bool x_pos = false;
 					if (x < Voxel::CHUNK_SIZE - 1)
 					{
 						x_pos = m_active_voxel[(x + 1) + y * Voxel::CHUNK_SIZE + z * Voxel::CHUNK_SIZE_SQR];
+					}
+					else if (chunk_map.find({ static_cast<int32_t>(m_position.x) + 1, static_cast<int32_t>(m_position.y), static_cast<int32_t>(m_position.z) }) != chunk_map.end())
+					{
+						x_pos = chunk_map.at({ static_cast<int32_t>(m_position.x) + 1, static_cast<int32_t>(m_position.y), static_cast<int32_t>(m_position.z) })->GetVoxel(x - Voxel::CHUNK_SIZE + 1, y, z);
 					}
 
 					bool y_neg = false;
@@ -51,11 +62,21 @@ void Chunk::CreateChunk(std::shared_ptr<GameObject> world, std::shared_ptr<Mater
 					{
 						z_neg = m_active_voxel[x + y * Voxel::CHUNK_SIZE + (z - 1) * Voxel::CHUNK_SIZE_SQR];
 					}
+					else if (chunk_map.find({ static_cast<int32_t>(m_position.x), static_cast<int32_t>(m_position.y), static_cast<int32_t>(m_position.z) - 1 }) != chunk_map.end())
+					{
+						// check if face is hidden by other chunk
+						z_neg = chunk_map.at({ static_cast<int32_t>(m_position.x), static_cast<int32_t>(m_position.y), static_cast<int32_t>(m_position.z) - 1 })->GetVoxel(x, y, z + Voxel::CHUNK_SIZE - 1);
+					}
 
 					bool z_pos = false;
 					if (z < Voxel::CHUNK_SIZE - 1)
 					{
 						z_pos = m_active_voxel[x + y * Voxel::CHUNK_SIZE + (z + 1) * Voxel::CHUNK_SIZE_SQR];
+					}
+					else if (chunk_map.find({ static_cast<int32_t>(m_position.x), static_cast<int32_t>(m_position.y), static_cast<int32_t>(m_position.z) + 1 }) != chunk_map.end())
+					{
+						// check if face is hidden by other chunk
+						z_pos = chunk_map.at({ static_cast<int32_t>(m_position.x), static_cast<int32_t>(m_position.y), static_cast<int32_t>(m_position.z) + 1 })->GetVoxel(x, y, z - Voxel::CHUNK_SIZE + 1); // faces are invisible because they are removed before, should make 2 lists
 					}
 
 					CreateCube(mesh, x_neg, x_pos, y_neg, y_pos, z_neg, z_pos, x, y, z);
@@ -86,6 +107,11 @@ void Chunk::SetVoxel(const uint32_t x, const uint32_t y, const uint32_t z)
 void Chunk::SetBlockType(const uint32_t x, const uint32_t y, const uint32_t z, const TBlock type)
 {
 	m_blocktypes.at(x + y * Voxel::CHUNK_SIZE + z * Voxel::CHUNK_SIZE_SQR) = type;
+}
+
+bool Chunk::GetVoxel(const uint32_t x, const uint32_t y, const uint32_t z)
+{
+	return m_active_voxel[x + y * Voxel::CHUNK_SIZE + z * Voxel::CHUNK_SIZE_SQR];
 }
 
 void Chunk::CreateCube(Geometry& mesh, const bool x_neg, const bool x_pos, const bool y_neg, const bool y_pos, const bool z_neg, const bool z_pos, uint32_t x, uint32_t y, uint32_t z)

@@ -8,32 +8,6 @@
 #include "Chunk.h"
 #include "TerrainGenerator.h"
 
-struct ChunkKey
-{
-	int32_t x;
-	int32_t y;
-	int32_t z;
-};
-
-inline bool const operator==(const ChunkKey& l, const ChunkKey& r)
-{
-	return l.x == r.x && l.y == r.y && l.z == r.z;
-}
-
-inline bool const operator<(const ChunkKey& l, const ChunkKey& r)
-{
-	if (l.x < r.x)  return true;
-	if (l.x > r.x)  return false;
-
-	if (l.y < r.y)  return true;
-	if (l.y > r.y)  return false;
-
-	if (l.z < r.z)  return true;
-	if (l.z > r.z)  return false;
-
-	return false;
-}
-
 class ChunkManager
 {
 public:

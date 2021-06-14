@@ -7,17 +7,45 @@
 #include "Voxel.h"
 #include "Cube.h"
 
+struct ChunkKey
+{
+	int32_t x;
+	int32_t y;
+	int32_t z;
+};
+
+inline bool const operator==(const ChunkKey& l, const ChunkKey& r)
+{
+	return l.x == r.x && l.y == r.y && l.z == r.z;
+}
+
+inline bool const operator<(const ChunkKey& l, const ChunkKey& r)
+{
+	if (l.x < r.x)  return true;
+	if (l.x > r.x)  return false;
+
+	if (l.y < r.y)  return true;
+	if (l.y > r.y)  return false;
+
+	if (l.z < r.z)  return true;
+	if (l.z > r.z)  return false;
+
+	return false;
+}
+
 class Chunk
 {
 public:
 	Chunk(const int32_t posx, const int32_t posy, const int32_t posz);
 
-	void CreateChunk(std::shared_ptr<GameObject> world, std::shared_ptr<Material> mat);
+	void CreateChunk(const std::map<ChunkKey, std::unique_ptr<Chunk>>& chunk_map, std::shared_ptr<GameObject> world, std::shared_ptr<Material> mat);
 	void UpdateMesh();
 	void DeleteChunk(std::shared_ptr<GameObject> world);
 
 	void SetVoxel(const uint32_t x, const uint32_t y, const uint32_t z);
 	void SetBlockType(const uint32_t x, const uint32_t y, const uint32_t z, const TBlock type);
+
+	bool GetVoxel(const uint32_t x, const uint32_t y, const uint32_t z);
 
 private:
 	void CreateCube(Geometry& mesh, const bool x_neg, const bool x_pos, const bool y_neg, const bool y_pos, const bool z_neg, const bool z_pos, uint32_t x, uint32_t y, uint32_t z);

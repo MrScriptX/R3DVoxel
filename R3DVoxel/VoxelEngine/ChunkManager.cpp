@@ -120,7 +120,7 @@ void ChunkManager::CreateNewChunk(int32_t x, int32_t y, int32_t z)
 	ChunkKey key = { x, y, z };
 
 	std::unique_ptr<Chunk> p_chunk = mp_terrain_generator->SetupWorld(x, y, z);
-	p_chunk->CreateChunk(mp_world, mp_world_mat);
+	p_chunk->CreateChunk(m_chunk_map, mp_world, mp_world_mat);
 
 	m_chunk_map.insert(std::pair<ChunkKey, std::unique_ptr<Chunk>>(key, std::move(p_chunk)));
 }
