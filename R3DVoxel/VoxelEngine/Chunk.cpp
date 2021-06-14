@@ -74,7 +74,8 @@ void Chunk::UpdateMesh()
 
 void Chunk::DeleteChunk(std::shared_ptr<GameObject> world)
 {
-	world->RemoveMesh(m_mesh_id); // remove mesh id
+	if(m_mesh_id != -1)
+		world->RemoveMesh(m_mesh_id); // remove mesh id
 }
 
 void Chunk::SetVoxel(const uint32_t x, const uint32_t y, const uint32_t z)
@@ -127,6 +128,24 @@ void Chunk::CreateCube(Geometry& mesh, const bool x_neg, const bool x_pos, const
 	uint32_t index_6 = mesh.addVertex(p7, color, t3);
 	uint32_t index_7 = mesh.addVertex(p8, color, t4);
 
+	uint32_t index_0_1 = mesh.addVertex(p1, color, t1);
+	uint32_t index_1_1 = mesh.addVertex(p2, color, t2);
+	uint32_t index_2_1 = mesh.addVertex(p3, color, t3);
+	uint32_t index_3_1 = mesh.addVertex(p4, color, t4);
+	uint32_t index_4_1 = mesh.addVertex(p5, color, t1);
+	uint32_t index_5_1 = mesh.addVertex(p6, color, t2);
+	uint32_t index_6_1 = mesh.addVertex(p7, color, t3);
+	uint32_t index_7_1 = mesh.addVertex(p8, color, t4);
+
+	uint32_t index_0_2 = mesh.addVertex(p1, color, t1);
+	uint32_t index_1_2 = mesh.addVertex(p2, color, t2);
+	uint32_t index_2_2 = mesh.addVertex(p3, color, t3);
+	uint32_t index_3_2 = mesh.addVertex(p4, color, t4);
+	uint32_t index_4_2 = mesh.addVertex(p5, color, t1);
+	uint32_t index_5_2 = mesh.addVertex(p6, color, t2);
+	uint32_t index_6_2 = mesh.addVertex(p7, color, t3);
+	uint32_t index_7_2 = mesh.addVertex(p8, color, t4);
+
 	//front
 	if (!z_neg)
 	{
@@ -144,28 +163,28 @@ void Chunk::CreateCube(Geometry& mesh, const bool x_neg, const bool x_pos, const
 	//right
 	if (!x_pos)
 	{
-		mesh.addIndices(index_1, index_3, index_5);
-		mesh.addIndices(index_5, index_3, index_7);
+		mesh.addIndices(index_1_1, index_3_1, index_5_1);
+		mesh.addIndices(index_5_1, index_3_1, index_7_1);
 	}
 
 	//left
 	if (!x_neg)
 	{
-		mesh.addIndices(index_4, index_6, index_0);
-		mesh.addIndices(index_0, index_6, index_2);
+		mesh.addIndices(index_4_1, index_6_1, index_0_1);
+		mesh.addIndices(index_0_1, index_6_1, index_2_1);
 	}
 
 	//top
 	if (!y_pos)
 	{
-		mesh.addIndices(index_2, index_6, index_3);
-		mesh.addIndices(index_3, index_6, index_7);
+		mesh.addIndices(index_2_2, index_6_2, index_3_2);
+		mesh.addIndices(index_3_2, index_6_2, index_7_2);
 	}
 
 	//bot
 	if (!y_neg)
 	{
-		mesh.addIndices(index_4, index_0, index_5);
-		mesh.addIndices(index_5, index_0, index_1);
+		mesh.addIndices(index_4_2, index_0_2, index_5_2);
+		mesh.addIndices(index_5_2, index_0_2, index_1_2);
 	}
 }

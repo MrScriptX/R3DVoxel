@@ -23,13 +23,13 @@ void Application::Start()
 	ChunkManager chunk_manager(world, world_mat, mp_engine->GetMainCamera());
 	chunk_manager.CreateWorld();
 
-	glm::vec3 lposition = { 50.0f, 100.0f, 0.0f };
+	glm::vec3 lposition = { 50.0f, 10.0f, 0.0f };
 
 	// create global lighting
 	std::shared_ptr<DirectionalLight> light = std::make_shared<DirectionalLight>();
 	light->ambient_strength = 0.2f;
-	light->diffuse_strength = 1.0f;
-	light->specular_strength = 1.0f;
+	light->diffuse_strength = 0.7f;
+	light->specular_strength = 0.2f;
 	light->color = glm::vec3(1.0f, 1.0f, 1.0f);
 	light->position = lposition;
 	light->direction = glm::normalize(light->position - glm::vec3(.0f, .0f, .0f));
