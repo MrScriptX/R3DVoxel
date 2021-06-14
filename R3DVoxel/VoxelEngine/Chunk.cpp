@@ -64,8 +64,8 @@ void Chunk::CreateChunk(std::shared_ptr<GameObject> world, std::shared_ptr<Mater
 		}
 	}
 
-	m_mesh_id = world->LoadMesh(mesh.vertices, mesh.indices);// get mesh id
-	world->bindMatToMesh(m_mesh_id, mat); // <- mesh id
+	m_mesh_id = world->LoadMesh(mesh.vertices, mesh.indices);
+	world->bindMatToMesh(m_mesh_id, mat);
 }
 
 void Chunk::UpdateMesh()
