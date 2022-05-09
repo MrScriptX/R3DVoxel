@@ -14,6 +14,7 @@ void Application::Start()
 	catch (const std::runtime_error& e)
 	{
 		std::cerr << e.what() << std::endl;
+		return;
 	}
 
 	// init world
