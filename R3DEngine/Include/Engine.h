@@ -9,6 +9,8 @@
 
 #include "graphics/Geometry.h"
 
+#include "ui/ConsoleUI.h"
+
 class Engine
 {
   public:
@@ -55,6 +57,9 @@ class Engine
 	std::shared_ptr<Config> mp_config;
 
 	std::chrono::time_point<std::chrono::high_resolution_clock> m_last_time;
+
+	// UI
+	std::vector<UI*> m_UIs;
 };
 
 #endif // !R3DENGINE_INCLUDES_ENGINE_H_

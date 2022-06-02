@@ -8,6 +8,8 @@
 #include "../errors.h"
 #include "Mesh.h"
 
+#include "../ui/ConsoleUI.h"
+
 class GameObject
 {
   public:
@@ -46,6 +48,8 @@ class GameObject
 
 	const size_t& getMeshesCount();
 	const bool Deleted();
+
+	const std::vector<std::unique_ptr<Mesh>>& GetMeshInDeleteQueue() const;
 
   private:
 	std::vector<int32_t> m_mesh_to_update;

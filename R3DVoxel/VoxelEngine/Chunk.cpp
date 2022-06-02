@@ -82,12 +82,16 @@ void Chunk::BuildChunk(const std::map<ChunkKey, std::unique_ptr<Chunk>>& chunk_m
 	}
 
 	m_mesh_id = world->LoadMesh(mesh.vertices, mesh.indices);
+
+	if (m_position.x == -4) ConsoleUI::Log("Mesh ID {} pos x:{}, y:{}, z:{}", m_mesh_id, m_position.x, m_position.y, m_position.z);
+
 	world->bindMatToMesh(m_mesh_id, mat);
 }
 
 void Chunk::UpdateChunk(const std::map<ChunkKey, std::unique_ptr<Chunk>>& chunk_map, std::shared_ptr<GameObject> world)
 {
-	if (m_active_voxel == false)
+	// mesh should be updated only m_mesh_id != -1 otherwise, it should be built
+	if (m_active_voxel == false || m_mesh_id == -1)
 		return;
 
 	m_visible_voxel = { true };
@@ -163,7 +167,7 @@ void Chunk::UpdateChunk(const std::map<ChunkKey, std::unique_ptr<Chunk>>& chunk_
 void Chunk::DeleteChunk(std::shared_ptr<GameObject> world)
 {
 	if(m_mesh_id != -1)
-		world->RemoveMesh(m_mesh_id); // remove mesh id
+		world->RemoveMesh(m_mesh_id);
 }
 
 void Chunk::SetVoxel(const uint32_t x, const uint32_t y, const uint32_t z)
@@ -179,6 +183,11 @@ void Chunk::SetBlockType(const uint32_t x, const uint32_t y, const uint32_t z, c
 bool Chunk::GetVoxel(const uint32_t x, const uint32_t y, const uint32_t z)
 {
 	return m_active_voxel[x + y * Voxel::CHUNK_SIZE + z * Voxel::CHUNK_SIZE_SQR];
+}
+
+glm::vec3 Chunk::GetPosition()
+{
+	return m_position;
 }
 
 void Chunk::CreateCube(Geometry& mesh, uint32_t x, uint32_t y, uint32_t z)
@@ -203,6 +212,9 @@ void Chunk::CreateCube(Geometry& mesh, uint32_t x, uint32_t y, uint32_t z)
 	glm::vec3 color;
 	switch (m_blocktypes[x + y * Voxel::CHUNK_SIZE + z * Voxel::CHUNK_SIZE_SQR])
 	{
+	case TBlock::GRASS:
+		color = { 1.0f, 0.0f, 0.0f };
+		break;
 	case TBlock::DEFAULT:
 		color = { 1.0f, 1.0f, 1.0f };
 		break;
