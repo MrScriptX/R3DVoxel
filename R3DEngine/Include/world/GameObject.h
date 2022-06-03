@@ -8,8 +8,6 @@
 #include "../errors.h"
 #include "Mesh.h"
 
-#include "../ui/ConsoleUI.h"
-
 class GameObject
 {
   public:

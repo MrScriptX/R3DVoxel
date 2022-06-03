@@ -53,6 +53,8 @@ void Application::Start()
 	{
 		chunk_manager.UpdateWorld(scene, mp_engine->GetMainCamera());
 
+		Watcher::WatchPosition("camera", mp_engine->GetMainCamera()->GetPosition());
+
 		mp_engine->update();
 		mp_engine->draw();
 	} while (!mp_engine->shouldClose());
