@@ -5,6 +5,7 @@
 #include <utility>
 #include <cmath>
 
+#include "../WorldMenu.h"
 #include "Chunk.h"
 #include "TerrainGenerator.h"
 
@@ -20,6 +21,8 @@ public:
 	void CreateNewChunk(int32_t x, int32_t y, int32_t z);
 	void DestroyChunk(const int32_t x, const int32_t y, const int32_t z);
 
+	WorldMenu& GetMenu();
+
 private:
 	std::unique_ptr<TerrainGenerator> mp_terrain_generator;
 
@@ -28,11 +31,13 @@ private:
 
 	std::map<ChunkKey, std::unique_ptr<Chunk>> m_setup_list;
 	std::map<ChunkKey, std::unique_ptr<Chunk>> m_chunk_map;
-	const uint8_t m_load_radius = 5;
+	uint8_t m_load_radius = 10;
 	glm::vec3 m_render_position;
 
 	glm::vec3 m_render_max;
 	glm::vec3 m_render_min;
+
+	WorldMenu m_worldmenu;
 };
 
 #endif

@@ -1,6 +1,6 @@
 #include "ChunkManager.h"
 
-ChunkManager::ChunkManager(std::shared_ptr<GameObject> pworld, std::shared_ptr<Material> p_world_mat, std::shared_ptr<Camera> p_camera) : mp_world(pworld), mp_world_mat(p_world_mat)
+ChunkManager::ChunkManager(std::shared_ptr<GameObject> pworld, std::shared_ptr<Material> p_world_mat, std::shared_ptr<Camera> p_camera) : mp_world(pworld), mp_world_mat(p_world_mat), m_worldmenu(m_load_radius)
 {
 	mp_terrain_generator = std::make_unique<TerrainGenerator>();
 	m_render_position = p_camera->GetPosition();
@@ -184,4 +184,9 @@ void ChunkManager::DestroyChunk(const int32_t x, const int32_t y, const int32_t 
 	m_chunk_map.at(key)->DeleteChunk(mp_world);
 
 	m_chunk_map.erase(key);
+}
+
+WorldMenu& ChunkManager::GetMenu()
+{
+	return m_worldmenu;
 }

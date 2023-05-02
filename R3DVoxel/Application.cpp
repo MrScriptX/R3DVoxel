@@ -49,6 +49,12 @@ void Application::Start()
 	};
 	mp_engine->BindKeyToFunc(GLFW_KEY_E, fillmode, ActionType::R3D_PRESS);
 
+	// std::function<void()> hide_worldmanager = [this]() { mp_engine->SetFillMode(); };
+	// mp_engine->BindKeyToFunc(GLFW_KEY_F2, hide_worldmanager, ActionType::R3D_PRESS);
+
+	mp_engine->RenderUI(chunk_manager.GetMenu());
+	mp_engine->GetMainCamera()->SetPosition(glm::vec3(0.f, 10.f, 0.f));
+
 	do
 	{
 		chunk_manager.UpdateWorld(scene, mp_engine->GetMainCamera());

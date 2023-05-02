@@ -82,9 +82,6 @@ void Chunk::BuildChunk(const std::map<ChunkKey, std::unique_ptr<Chunk>>& chunk_m
 	}
 
 	m_mesh_id = world->LoadMesh(mesh.vertices, mesh.indices);
-
-	if (m_position.x == -4) ConsoleUI::Log("Mesh ID {} pos x:{}, y:{}, z:{}", m_mesh_id, m_position.x, m_position.y, m_position.z);
-
 	world->bindMatToMesh(m_mesh_id, mat);
 }
 
@@ -213,7 +210,7 @@ void Chunk::CreateCube(Geometry& mesh, uint32_t x, uint32_t y, uint32_t z)
 	switch (m_blocktypes[x + y * Voxel::CHUNK_SIZE + z * Voxel::CHUNK_SIZE_SQR])
 	{
 	case TBlock::GRASS:
-		color = { 1.0f, 0.0f, 0.0f };
+		color = { 0.0f, 1.0f, 0.0f };
 		break;
 	case TBlock::DEFAULT:
 		color = { 1.0f, 1.0f, 1.0f };

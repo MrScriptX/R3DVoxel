@@ -152,6 +152,7 @@
     <ClCompile Include="VoxelEngine\Chunk.cpp" />
     <ClCompile Include="VoxelEngine\ChunkManager.cpp" />
     <ClCompile Include="VoxelEngine\TerrainGenerator.cpp" />
+    <ClCompile Include="WorldMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="VoxelEngine\Cube.h" />
     <ClInclude Include="VoxelEngine\TerrainGenerator.h" />
     <ClInclude Include="VoxelEngine\Voxel.h" />
+    <ClInclude Include="WorldMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
