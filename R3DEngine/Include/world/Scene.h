@@ -29,7 +29,7 @@ class Scene
 	R3DResult RemoveLight(std::shared_ptr<SpotLight> lightobject);
 
 	void Load(std::shared_ptr<Renderer> p_renderer);
-	void Render(VkCommandBuffer& command_buffer, const int32_t frame);
+	void Render(VkCommandBuffer& command_buffer, const int32_t frame, const std::unordered_map<std::string, vred::renderer::ipipeline>& pipelines);
 	void Clean(const int32_t frame);
 	void CleanRessources(std::shared_ptr<Renderer> p_renderer);
 
@@ -38,9 +38,11 @@ class Scene
 
 	void ToUpdate();
 	void Update(const int32_t frame);
+	void SetUpdated(const int32_t frame);
 	const bool IsUpdate(const int i) const;
 	const bool IsUpdated() const;
-	std::vector<std::shared_ptr<GameObject>>& getObjects();
+	std::vector<std::shared_ptr<GameObject>>& get_objects();
+	VkDescriptorSet GetDescriptorSet();
 
   private:
 	R3DResult addDirectionalLight(std::shared_ptr<DirectionalLight> lightobject);

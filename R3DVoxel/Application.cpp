@@ -6,9 +6,14 @@ Application::Application()
 
 void Application::Start()
 {
+	vred::settings setting;
+	setting.app_name = "REDVoxel";
+	setting.window_width = 1920;
+	setting.window_height = 1080;
+
 	try
 	{
-		mp_engine = std::make_unique<Engine>(1920, 1080);
+		mp_engine = std::make_unique<Engine>(setting);
 		Logger::init();
 	}
 	catch (const std::runtime_error& e)
@@ -17,9 +22,17 @@ void Application::Start()
 		return;
 	}
 
+	vred::renderer::shader_stages shaders_files;
+	shaders_files.vertex = "../assets/shaders/vert.spv";
+	shaders_files.fragment = "../assets/shaders/no_texture_shader.spv";
+
+	const std::string shader = mp_engine->create_pipeline("shader", shaders_files);
+
 	// init world
-	std::shared_ptr<Material> world_mat = mp_engine->CreateMaterial(TSHADER::NO_TEXTURE);
+	std::shared_ptr<Material> world_mat = mp_engine->CreateMaterial(shader);
 	std::shared_ptr<GameObject> world = mp_engine->CreateGameObject();
+
+	mp_engine->GetMainCamera()->SetPosition(glm::vec3(0.f, 10.f, 0.f));
 
 	ChunkManager chunk_manager(world, world_mat, mp_engine->GetMainCamera());
 	chunk_manager.CreateWorld();
@@ -54,7 +67,6 @@ void Application::Start()
 	// mp_engine->BindKeyToFunc(GLFW_KEY_F2, hide_worldmanager, ActionType::R3D_PRESS);
 
 	mp_engine->RenderUI(chunk_manager.GetMenu());
-	mp_engine->GetMainCamera()->SetPosition(glm::vec3(0.f, 10.f, 0.f));
 
 	do
 	{

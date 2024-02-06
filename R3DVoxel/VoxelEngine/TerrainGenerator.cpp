@@ -42,8 +42,8 @@ std::unique_ptr<Chunk> TerrainGenerator::SetupWorld(const int32_t posx, const in
 		{
 			for (int32_t z = 0; z < Voxel::CHUNK_SIZE; z++)
 			{
-				float noise_value = m_perlin.perlin(static_cast<float>(x + std::abs(posx) * Voxel::CHUNK_SIZE), static_cast<float>(z + std::abs(posz) * Voxel::CHUNK_SIZE));
-				if (y + std::abs(posy) * Voxel::CHUNK_SIZE < ((noise_value + 1) / 2) * Voxel::CHUNK_SIZE)
+				float noise_value = m_perlin.perlin(static_cast<float>(x + posx * Voxel::CHUNK_SIZE), static_cast<float>(z + posz * Voxel::CHUNK_SIZE));				
+				if (y + posy * Voxel::CHUNK_SIZE < ((noise_value + 1) / 2) * Voxel::CHUNK_SIZE)
 				{
 					p_chunk->SetVoxel(x, y, z);
 				}
